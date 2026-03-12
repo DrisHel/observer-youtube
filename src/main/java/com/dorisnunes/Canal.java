@@ -11,19 +11,27 @@ public class Canal {
         this.nome = nome;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void inscrever(Observador observador) {
         inscritos.add(observador);
-        System.out.println(observador + " se inscreveu no canal " + nome);
+        System.out.println("✅ Usuário se inscreveu no canal " + nome);
     }
 
     public void publicarVideo(String titulo) {
-        System.out.println("Canal " + nome + " publicou: " + titulo);
+        System.out.println("\n🎥 Canal " + nome + " publicou: \"" + titulo + "\"");
         notificarInscritos(titulo);
     }
 
     private void notificarInscritos(String video) {
-        for (Observador observador : inscritos) {
-            observador.atualizar(video);
+        if (inscritos.isEmpty()) {
+            System.out.println("(Nenhum inscritor para notificar)");
+        } else {
+            for (Observador observador : inscritos) {
+                observador.atualizar(video);
+            }
         }
     }
 }
