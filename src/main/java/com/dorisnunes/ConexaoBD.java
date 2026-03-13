@@ -69,7 +69,16 @@ public class ConexaoBD {
                     "data_inscricao TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
                     "FOREIGN KEY (nome_usuario) REFERENCES usuarios(nome)" +
                     ")");
-            System.out.println(" Tabela 'inscricoes' criada/verificada\n");
+            System.out.println(" Tabela 'inscricoes' criada/verificada");
+
+            // Criar tabela videos
+            stmt.execute("CREATE TABLE IF NOT EXISTS videos (" +
+                    "id SERIAL PRIMARY KEY," +
+                    "nome_canal VARCHAR(100) NOT NULL," +
+                    "titulo VARCHAR(255) NOT NULL," +
+                    "data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                    ")");
+            System.out.println(" Tabela 'videos' criada/verificada\n");
         } catch (SQLException e) {
             System.out.println(" Erro ao criar tabelas: " + e.getMessage());
         }

@@ -17,11 +17,15 @@ public class Canal {
 
     public void inscrever(Observador observador) {
         inscritos.add(observador);
-        System.out.println("✅ Usuário se inscreveu no canal " + nome);
+        System.out.println(" Usuário se inscreveu no canal " + nome);
     }
 
     public void publicarVideo(String titulo) {
-        System.out.println("\n🎥 Canal " + nome + " publicou: \"" + titulo + "\"");
+        System.out.println("\n Canal " + nome + " publicou: \"" + titulo + "\"");
+
+        // Persistir informação de vídeo publicado (para estatísticas)
+        VideoDAO.salvar(nome, titulo);
+
         notificarInscritos(titulo);
     }
 

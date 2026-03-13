@@ -36,7 +36,7 @@ public class App {
                     publicarVideo(scanner, canal);
                     break;
                 case "4":
-                    verEstatisticas();
+                    verEstatisticas(canal);
                     break;
                 case "5":
                     running = false;
@@ -97,13 +97,15 @@ public class App {
         }
     }
 
-    private static void verEstatisticas() {
+    private static void verEstatisticas(Canal canal) {
         int totalUsuarios = UsuarioDAO.listarTodos().size();
-        int totalInscritos = UsuarioDAO.contarInscritos("DevJava");
-        
-        System.out.println("\n=== 📊 ESTATÍSTICAS DO CANAL ===");
+        int totalInscritos = UsuarioDAO.contarInscritos(canal.getNome());
+        int totalVideos = VideoDAO.contarVideos(canal.getNome());
+
+        System.out.println("\n===  ESTATÍSTICAS DO CANAL ===");
         System.out.println("Total de usuários cadastrados: " + totalUsuarios);
         System.out.println("Total de inscritos no canal: " + totalInscritos);
+        System.out.println("Total de vídeos publicados: " + totalVideos);
         System.out.println("================================\n");
     }
 }

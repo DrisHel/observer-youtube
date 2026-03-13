@@ -73,7 +73,7 @@ public class UsuarioDAO {
             rs.close();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println("⚠ Erro ao listar inscritos: " + e.getMessage());
+            System.out.println(" Erro ao listar inscritos: " + e.getMessage());
             e.printStackTrace();
         }
         return inscritos;
@@ -95,7 +95,7 @@ public class UsuarioDAO {
             rs.close();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println("⚠ Erro ao contar inscritos: " + e.getMessage());
+            System.out.println(" Erro ao contar inscritos: " + e.getMessage());
             e.printStackTrace();
         }
         return 0;
