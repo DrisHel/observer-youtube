@@ -1,7 +1,7 @@
 package com.dorisnunes;
 
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
@@ -9,6 +9,10 @@ public class App {
         ConexaoBD.getConexao();
         
         Canal canal = new Canal("DevJava");
+        
+        // Carregar inscritos do banco de dados para o canal
+        carregarInscritosDoBanco(canal);
+        
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -101,11 +105,30 @@ public class App {
         int totalUsuarios = UsuarioDAO.listarTodos().size();
         int totalInscritos = UsuarioDAO.contarInscritos(canal.getNome());
         int totalVideos = VideoDAO.contarVideos(canal.getNome());
+        java.util.List<String> titulos = VideoDAO.listarTitulos(canal.getNome());
 
         System.out.println("\n===  ESTATÍSTICAS DO CANAL ===");
         System.out.println("Total de usuários cadastrados: " + totalUsuarios);
         System.out.println("Total de inscritos no canal: " + totalInscritos);
         System.out.println("Total de vídeos publicados: " + totalVideos);
+
+        System.out.println("\nÚltimos vídeos publicados:");
+        if (titulos.isEmpty()) {
+            System.out.println(" (Nenhum vídeo publicado ainda)");
+        } else {
+            for (String titulo : titulos) {
+                System.out.println(" - " + titulo);
+            }
+        }
         System.out.println("================================\n");
+    }
+
+    private static void carregarInscritosDoBanco(Canal canal) {
+        List<String> inscritos = UsuarioDAO.listarInscritos(canal.getNome());
+        for (String nomeUsuario : inscritos) {
+            Usuario usuario = new Usuario(nomeUsuario);
+            canal.inscrever(usuario);
+        }
+        System.out.println(" Carregados " + inscritos.size() + " inscritos do banco de dados\n");
     }
 }
