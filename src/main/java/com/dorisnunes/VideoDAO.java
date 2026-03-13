@@ -44,4 +44,24 @@ public class VideoDAO {
         }
         return 0;
     }
+
+    public static java.util.List<String> listarTitulos(String nomeCanal) {
+        java.util.List<String> titulos = new java.util.ArrayList<>();
+        String sql = "SELECT titulo FROM videos WHERE nome_canal = ? ORDER BY data_publicacao DESC";
+        try {
+            Connection conexao = ConexaoBD.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setString(1, nomeCanal);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                titulos.add(rs.getString("titulo"));
+            }
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            System.out.println("⚠ Erro ao listar títulos de vídeos: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return titulos;
+    }
 }
