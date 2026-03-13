@@ -61,7 +61,7 @@ public class UsuarioDAO {
 
     public static List<String> listarInscritos(String nomeCanal) {
         List<String> inscritos = new ArrayList<>();
-        String sql = "SELECT DISTINCT nome_usuario FROM inscricoes WHERE nome_canal = ? ORDER BY data_inscricao DESC";
+        String sql = "SELECT nome_usuario FROM inscricoes WHERE nome_canal = ? GROUP BY nome_usuario ORDER BY MAX(data_inscricao) DESC";
         try {
             Connection conexao = ConexaoBD.getConexao();
             PreparedStatement pstmt = conexao.prepareStatement(sql);
