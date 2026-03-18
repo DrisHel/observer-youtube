@@ -46,7 +46,12 @@ mvn clean compile
 ```
 
 #### ✅ Executar a aplicação
-A classe principal é `com.dorisnunes.App`, que inicia um menu interativo no console.
+A classe principal é `com.dorisnunes.App`, que inicia um menu interativo no console com as seguintes opções:
+- 1. Cadastrar novo usuário
+- 2. Inscrever usuário no canal
+- 3. Publicar vídeo
+- 4. Ver estatísticas (total de usuários, inscritos, vídeos e lista dos últimos vídeos publicados)
+- 5. Sair
 
 ##### Opção 1: executar direto com Maven (sem gerar JAR)
 ```bash
